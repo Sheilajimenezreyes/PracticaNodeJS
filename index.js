@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const userRouter = require("./router/UserRouter");
 const recipeRouter = require("./router/RecipesRouter");
+const tokenRouter = require("./router/TokenRouter");
 const connectToDataBase = require ("./bd/Connect");
 connectToDataBase();
 const PORT = Number(process.env.PORT || 3000);
@@ -14,9 +15,9 @@ app.use(cors({
     allowedHeaders:["Content-Type","auth-token"],
 }));
 
-app.use("/user", userRouter)
+app.use("/", userRouter)
 app.use("/", recipeRouter);
-
+app.use("/", tokenRouter)
 
 app.listen(PORT, ()=>{
     console.log("Escuchando en el puerto"+ PORT)
