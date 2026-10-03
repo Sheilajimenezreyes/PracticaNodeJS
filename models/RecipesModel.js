@@ -22,7 +22,7 @@ const recipeSchema = new Schema({
         type: String,
         required: [true, "Añadir la categoria es obligatorio"]
     },
-    image:{
+    imageUrl:{
         type: String
     },
     difficulty:{
@@ -34,10 +34,11 @@ const recipeSchema = new Schema({
     },
     likes:{
         type: [Schema.Types.ObjectId],
-        ref:"User"
+        ref:"User",
+        default: []
     },
     creationDate:{
-        Type: Date,
+        type: Date,
         required: [true, "La fecha de creación es obligatoria"],
         default: Date.now
     }
