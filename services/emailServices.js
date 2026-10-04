@@ -3,18 +3,18 @@ const nodemailer = require ('nodemailer');
 const emailConfig = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'sheilajimene@gmail.com',
+        user: 'sheilajimenezreyes24@gmail.com',
         pass: 'moik izam jfki yncj'
     }
 });
 
-const sendEmail = async (to) =>{
+const sendEmail = async (to, subject, html) =>{
     try {
         const mailOptions = {
-            from: 'sheilajimene@gmail.com',
+            from: 'sheilajimenezreyes24@gmail.com',
             to: to,
-            object: 'Gracias por registrate en mi app de la super bootcamp',
-            html: '<h1>Graciasssss eres el mejor</h1>'
+            subject: subject,
+            html: html
         }
         await emailConfig.sendMail(mailOptions);
     } catch (error) {

@@ -1,4 +1,4 @@
-const jwt =require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
  
 const generateToke=(payload,isRefresToken)=>{
     if (isRefresToken){
@@ -7,7 +7,7 @@ const generateToke=(payload,isRefresToken)=>{
         });
     }
        return jwt.sign(payload,process.env.SECRET_TOKEN,{
-            expiresIn:"40min"
+            expiresIn:"15min"
         });
 }
  

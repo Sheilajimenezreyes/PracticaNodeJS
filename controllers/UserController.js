@@ -2,6 +2,7 @@ const recipeModel = require("../models/RecipesModel")
 const userModel = require("../models/UserModel")
 const bcrypt = require("bcrypt")
 const generateToke = require("../utils/rules")
+const sendEmail = require("../services/emailServices")
 
 const createUser = async (req, res)=>{
 try {
@@ -13,6 +14,7 @@ try {
        role,
        favoriteRecipes 
     })
+    await sendEmail("sheilajimenezreyes24@gmail.com", "Bienvenido", `<h2> Bienvenido ${name}</h2><p>Gracias por llegar a registrarte en nuestra web de recetas</p>`)
     return res.status(200).json({status: "SUCCES", data: newUser})
 } catch (error) {
   return res.status(500).json({message: error, status: "ERROR"})
@@ -51,7 +53,7 @@ const favoriteRecipes = async (req, res)=>{
     if (!user || user.favoriteRecipes.length===0 || user.favoriteRecipes===null){
       return res.status(200).json({message: "Lista vacía", status: "Error"})
     }else{
-      return res.status(200).json({status: "Succes", data:favoriteRecipes})
+      return res.status(200).json({status: "Succes", data:user.favoriteRecipes})
     }
   } catch (error) {
     return res.status(500).json({message: error, status: "ERROR"})
@@ -169,8 +171,5 @@ const deleteRecipe = async (req, res)=>{
     }
 };
  
-
-
-
 
 module.exports = {createUser, loginUser, favoriteRecipes, addRecipe, deleteRecipeForList, createRecipe, updateRecipe, deleteRecipe, editUser}

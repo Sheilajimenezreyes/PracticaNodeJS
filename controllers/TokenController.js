@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const generateToke = require("../utils/rules");
 const refreshToken = (req, res) => {
 
     try {
@@ -12,8 +13,9 @@ const refreshToken = (req, res) => {
             token,
             process.env.SECRET_TOKEN_REFRESH
         );
-        const accessToken = generateToken(
-            payload, false
+        const {_id,email}=payload
+        const accessToken = generateToke(
+            {_id,email}, false
         );
         return res.status(200).json({
             accessToken
